@@ -1,10 +1,11 @@
 using DTasks.Execution;
+using DTasks.Infrastructure.Execution;
 
 namespace DTasks.Infrastructure;
 
-internal partial class DAsyncFlow : IDistributedCancellationHandler
+public sealed partial class DAsyncFlow : IDAsyncCancellationHandler
 {
-    void IDistributedCancellationHandler.Cancel(DCancellationId id)
+    void IDAsyncCancellationHandler.Cancel(DCancellationId id)
     {
         if (!_cancellations.TryGetValue(id, out DCancellationTokenSource? source))
             return;
